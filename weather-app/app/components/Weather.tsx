@@ -7,7 +7,7 @@ interface WeatherProp {
 
 const Weather = ({ data }: WeatherProp) => {
     return (
-        <div className='bg-neutral-700 rounded p-4 flex flex-col justify-center items-center'>
+        <div className='bg-neutral-900 rounded p-4 flex flex-col justify-center items-center'>
             <h2>Weather in <strong>{data.name}</strong></h2>
             <p>Temperature: {data.main.temp}°C</p>
             <p>Humidity: {data.main.humidity}%</p>

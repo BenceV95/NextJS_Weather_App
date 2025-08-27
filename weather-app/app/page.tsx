@@ -6,6 +6,7 @@ import { fetchLocationData, fetchWeatherData } from "./lib/fetchingHelpers";
 
 import type { WeatherData } from "./types/main";
 import Weather from "./components/Weather";
+import Search from "./components/Search";
 
 export default function Home() {
 
@@ -17,7 +18,8 @@ export default function Home() {
   const fetchData = async (location: string) => {
     try {
       setLoading(true);
-
+      setWeather(null);
+      setError(null);
       const locationData = await fetchLocationData(location);
       const weatherData = await fetchWeatherData(locationData);
       setWeather(weatherData);
@@ -32,12 +34,15 @@ export default function Home() {
   return (
     <>
       <button
-        className="p-2 bg-blue-600 rounded hover:cursor-pointer hover:bg-blue-700"
+        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 hover:cursor-pointer transition"
         onClick={() => fetchData("budapest")}
         disabled={loading}
       >
         {loading ? "Loading..." : "Search Budapest"}
       </button>
+      <div>
+        <Search onSearch={fetchData} loading={loading} />
+      </div>
       <div>
         {weather && <Weather data={weather} />}
         {error && <h1>Error: {error.message}</h1>}
