@@ -12,7 +12,7 @@ export default function Home() {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
-  
+
 
   const fetchData = async (location: string) => {
     try {
@@ -21,7 +21,7 @@ export default function Home() {
       const locationData = await fetchLocationData(location);
       const weatherData = await fetchWeatherData(locationData);
       setWeather(weatherData);
-      
+
     } catch (error: any) {
       setError(error)
     } finally {
@@ -31,20 +31,17 @@ export default function Home() {
 
   return (
     <>
-      <main className="flex-1 p-4 flex flex-col items-center justify-center">
-        <button
-          className="p-2 bg-blue-600 rounded hover:cursor-pointer hover:bg-blue-700"
-          onClick={() => fetchData("budapest")}
-          disabled={loading}
-        >
-          {loading ? "Loading..." : "Search Budapest"}
-        </button>
-        <div>
-          {weather && <Weather data={weather} />}
-          {error && <h1>Error: {error.message}</h1>}
-        </div>
-      </main>
-      <Footer />
+      <button
+        className="p-2 bg-blue-600 rounded hover:cursor-pointer hover:bg-blue-700"
+        onClick={() => fetchData("budapest")}
+        disabled={loading}
+      >
+        {loading ? "Loading..." : "Search Budapest"}
+      </button>
+      <div>
+        {weather && <Weather data={weather} />}
+        {error && <h1>Error: {error.message}</h1>}
+      </div>
     </>
   );
 }

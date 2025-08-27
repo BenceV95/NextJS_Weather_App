@@ -34,9 +34,11 @@ export default function CityName() {
     }
   }
 
+  if (loading) return <div className="flex h-screen items-center justify-center"><strong>{cityName} </strong> Loading...</div>;
+  if (error) return <div className="flex h-screen items-center justify-center text-red-500">{error.message}</div>;
+
   return (
     <div>
-      <p>City: <strong>{cityName}</strong></p>
       {weather && <Weather data={weather} />}
     </div>
   );
